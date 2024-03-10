@@ -13,7 +13,7 @@ local size = {gpu.getSize()}
 local element_groups = {
     ElementGroup:new({
                 DebugElement:new(size[1] - 31, size[2] - 31, 32, 32, 0xFF0000, gpu.decodeImage(table.unpack(ImageResampling:load_image("debug.png")))),
-                Element:new("test", 65, 65, 0, 0, 0xFFFFFF, 0x000000, "storage system", nil)},
+                Element:new("text_test", 2, 2, 0, 0, 0xFFFFFF, 0x000000, "storage system", nil)},
     "test_group")
 }
 

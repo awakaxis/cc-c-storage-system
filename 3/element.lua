@@ -82,8 +82,7 @@ function Element:update(gpu)
                 gpu.drawBuffer(drawX, drawY, drawWidth, 1, table.unpack(croppedBuffer))
             end
             if self.text then
-                gpu.setFont("ascii")
-                gpu.drawTextSmart((size[1] / 2) - (gpu.getTextLength(self.text, 1, 2) / 2), self.y, self.text, self.text_color, self.background_color, true, 1, 1)
+                io.stderr:write(string.format("\"are you sure you know what you're doing\" error in %s: Base elements should not handle text rendering\n", self.name))
             end
             gpu.sync()
         end
