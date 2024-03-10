@@ -1,0 +1,3 @@
+[minecraft:iron_ore]: [create_target_7:3]
+[minecraft:raw_iron_block]: [create_target_7:2]
+[minecraft:cobblestone]: [create_target_7:1]
