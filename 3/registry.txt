@@ -1,0 +1,1 @@
+{"identifier": "minecraft:cobblestone", "display_name": "Cobble", "data_links": [create_target_8:1, create_target_8:5], "funnels": {"funnel64": tm_rsPort_13:north, "funnel16": tm_rsPort_13:south, "funnel1": tm_rsPort_13:west}}

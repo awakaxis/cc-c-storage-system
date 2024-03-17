@@ -24,7 +24,7 @@ end
 
 function ElementGroup:handle_click(x, y, sneak)
     if not self.is_visible then
-        return false
+        return
     end
     local clicked = {}
     for _, element in ipairs(self.elements) do
@@ -33,9 +33,28 @@ function ElementGroup:handle_click(x, y, sneak)
         end
     end
     if not clicked[1] then
-        return false
+        return
     end
     return clicked[#clicked]:on_click(x, y, sneak)
+end
+
+-- returns nil if no element was clicked, otherwise returns the clicked element
+function ElementGroup:check_click(x, y, sneak)
+    if not self.is_visible then
+        print('invisible group')
+        return nil
+    end
+    local clicked = {}
+    for _, element in ipairs(self.elements) do
+        local value = element:check_click(x, y, sneak)
+        if value ~= nil then
+            clicked[#clicked+1] = value
+        end
+    end
+    if not clicked[1] then
+        return nil
+    end
+    return clicked[#clicked]
 end
 
 function ElementGroup:update(gpu)
@@ -54,6 +73,11 @@ end
 function ElementGroup:move_element(fromIndex, toIndex)
     local element = table.remove(self.elements, fromIndex)
     table.insert(self.elements, toIndex, element)
+end
+
+function ElementGroup:set_elements(elements)
+    self.elements = elements
+    return self
 end
 
 return ElementGroup

@@ -4,14 +4,14 @@ local DebugElement = {}
 DebugElement.__index = DebugElement
 setmetatable(DebugElement, {__index = Element})
 
-function DebugElement:new(x, y, width, height, background_color, image)
-    local o = Element:new("debug", x, y, width, height, background_color, 0x000000, nil, image)
+function DebugElement:new(parent_group, x, y, width, height, background_color, image)
+    local o = Element:new("debug", parent_group, x, y, width, height, background_color, 0x000000, nil, image)
     setmetatable(o, self)
     return o
 end
 
 function DebugElement:on_click(x, y, sneak)
-    print(string.format("Debug element clicked at %d, %d with sneak %s", x, y, tostring(sneak)))
+    Element.on_click(self, x, y, sneak)
     -- check for clicks on the leftmost 5 pixels of the element
     if self.x <= x and x < self.x + 5 then
         print("Left side clicked")
@@ -32,7 +32,6 @@ function DebugElement:on_click(x, y, sneak)
         print("Bottom side clicked")
         self.y = self.y + 1
     end
-    return true
 end
 
 return DebugElement

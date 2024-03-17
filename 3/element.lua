@@ -1,8 +1,9 @@
 require("image_resampling")
-local element_group = require "element_group"
+local ElementGroup = require "element_group"
 local Element = {}
 Element.__index = Element
 Element.name = nil
+Element.parent_group = nil
 Element.is_visible = true
 Element.x = 1
 Element.y = 1
@@ -15,7 +16,7 @@ Element.buffer = nil
 Element.buffer_width = nil
 Element.buffer_height = nil
 
-function Element:new(name, x, y, width, height, background_color, text_color, text, image)
+function Element:new(name, parent_group, x, y, width, height, background_color, text_color, text, image)
     local buffer = nil
     local buffer_width = nil
     local buffer_height = nil
@@ -26,6 +27,7 @@ function Element:new(name, x, y, width, height, background_color, text_color, te
     end
     local o = {
         name = name,
+        parent_group = parent_group,
         x = x,
         y = y,
         width = width,
@@ -41,22 +43,22 @@ function Element:new(name, x, y, width, height, background_color, text_color, te
     return o
 end
 
+-- returns nil if the element was not clicked, otherwise returns itself
 function Element:check_click(x, y, sneak)
     if not self.is_visible then
-        return false
+        return nil
     end
     if x == nil or y == nil or sneak == nil then
-        return false
+        return nil
     end
     if x >= self.x and x <= self.x + self.width and y >= self.y and y <= self.y + self.height then
-        return true
+        return self
     end
-    return false
+    return nil
 end
 
 function Element:on_click(x, y, sneak)
     print(string.format("Element clicked at %d, %d with sneak %s", x, y, tostring(sneak)))
-    return true
 end
 
 function Element:update(gpu)
@@ -81,7 +83,7 @@ function Element:update(gpu)
                 -- print(string.format("cropped image height: %d", #croppedBuffer / drawWidth))
                 gpu.drawBuffer(drawX, drawY, drawWidth, 1, table.unpack(croppedBuffer))
             end
-            if self.text then
+            if self.text and self.name ~= "text" then
                 io.stderr:write(string.format("\"are you sure you know what you're doing\" error in %s: Base elements should not handle text rendering\n", self.name))
             end
             gpu.sync()
@@ -95,6 +97,10 @@ end
 
 function Element:get_name()
     return self.name
+end
+
+function Element:get_parent_group()
+    return self.parent_group
 end
 
 return Element

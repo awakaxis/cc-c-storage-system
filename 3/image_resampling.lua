@@ -18,14 +18,21 @@ end
 
 function ImageResampling:load_image(name)
     local png = io.open(name, "rb")
-    local b = png._handle.read(1)
-    local bytes = {}
-    while b do
-        bytes[#bytes + 1] = string.unpack("<I1", b)
-        b = png._handle.read(1)
+    if not png then
+        png = io.open("missing.png", "rb")
     end
-    png:close()
-    return bytes
+    if png then
+        local b = png._handle.read(1)
+        local bytes = {}
+        while b do
+            bytes[#bytes + 1] = string.unpack("<I1", b)
+            b = png._handle.read(1)
+        end
+        png:close()
+        return bytes
+    else
+        print("Failed to load image")
+    end
 end
 
 -- function BufferCrop(buffer, bufferWidth, bufferHeight, originX, originY, monitorWidth, monitorHeight)

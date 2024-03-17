@@ -13,12 +13,18 @@ function Page:new(name, element_groups)
 end
 
 function Page:handle_click(x, y, sneak)
+    local clicked = {}
     for _, element_group in ipairs(self.element_groups) do
-        if element_group:handle_click(x, y, sneak) then
-            return true
+        if element_group:check_click(x, y, sneak) ~= nil then
+            clicked[#clicked + 1] = element_group
         end
     end
-    return false
+    if not clicked[1] then
+        print("No element clicked")
+        return nil
+    end
+    clicked[#clicked]:handle_click(x, y, sneak)
+    return clicked[#clicked]:check_click(x, y, sneak)
 end
 
 function Page:update(gpu)
