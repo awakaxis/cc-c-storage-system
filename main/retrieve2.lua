@@ -1,4 +1,4 @@
-local ItemEntryElement = require("item_entry_element")
+local ItemEntryElement = require("page.element.item_entry_element")
 
 local registry = ParseItemData()
 

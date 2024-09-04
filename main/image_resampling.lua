@@ -1,6 +1,6 @@
 local ImageResampling = {}
 ImageResampling.__index = ImageResampling
-ImageResampling.gpu = peripheral.wrap("right")
+ImageResampling.gpu = peripheral.find("tm_gpu")
 
 function NearestNeighbor(originalPixels, originalWidth, originalHeight, newWidth, newHeight)
     local newPixels = {}
@@ -17,9 +17,9 @@ function NearestNeighbor(originalPixels, originalWidth, originalHeight, newWidth
 end
 
 function ImageResampling:load_image(name)
-    local png = io.open(name, "rb")
+    local png = io.open("assets/"..name, "rb")
     if not png then
-        png = io.open("missing.png", "rb")
+        png = io.open("assets/missing.png", "rb")
     end
     if png then
         local b = png._handle.read(1)

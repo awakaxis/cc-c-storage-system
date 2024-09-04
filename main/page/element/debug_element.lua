@@ -1,4 +1,4 @@
-local Element = require("element")
+local Element = require("page.element.element")
 
 local DebugElement = {}
 DebugElement.__index = DebugElement

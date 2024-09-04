@@ -1,4 +1,4 @@
-local Element = require("element")
+local Element = require("page.element.element")
 local ImageResampling = require("image_resampling")
 
 function ParseItemData()
@@ -60,12 +60,12 @@ function ItemEntryElement:get_item()
     return self.item
 end
 
-function ItemEntryElement:update(gpu)
+function ItemEntryElement:draw(gpu)
     if self.is_visible then
         if self.y < 1 or self.y > size[2] - 24 then
             return
         end
-        Element.update(self, gpu)
+        Element.draw(self, gpu)
         local itemCount = 0
         if self.item.identifier ~= "placeholder" then
             for _, link in ipairs(self.item.data_links) do

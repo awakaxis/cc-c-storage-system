@@ -1,5 +1,5 @@
 require("image_resampling")
-local ElementGroup = require "element_group"
+local ElementGroup = require("page.element.element_group")
 local Element = {}
 Element.__index = Element
 Element.name = nil
@@ -61,7 +61,7 @@ function Element:on_click(x, y, sneak)
     print(string.format("Element clicked at %d, %d with sneak %s", x, y, tostring(sneak)))
 end
 
-function Element:update(gpu)
+function Element:draw(gpu)
     -- monitor size: pixelX, pixelY, blockX, blockY, resMult
     local size = {gpu.getSize()}
     if self.is_visible then

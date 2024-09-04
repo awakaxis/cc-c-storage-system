@@ -1,4 +1,4 @@
-local Element = require "element"
+local Element = require("page.element.element")
 
 local TextElement = {}
 TextElement.__index = TextElement
@@ -25,11 +25,11 @@ function TextElement:check_click(x, y, sneak)
     return nil
 end
 
-function TextElement:update(gpu)
+function TextElement:draw(gpu)
     if not self.is_visible then
         return
     end
-    Element.update(self, gpu)
+    Element.draw(self, gpu)
     if self.text then
         gpu.setFont("ascii")
         if self.alignFlag == 0 then

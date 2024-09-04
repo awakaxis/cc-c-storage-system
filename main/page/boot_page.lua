@@ -1,8 +1,8 @@
-local Page = require("page")
-local Element = require("element")
-local DebugElement = require("debug_element")
-local TextElement = require("text_element")
-local ElementGroup = require("element_group")
+local Page = require("page.page")
+local Element = require("page.element.element")
+local DebugElement = require("page.element.debug_element")
+local TextElement = require("page.element.text_element")
+local ElementGroup = require("page.element.element_group")
 local ImageResampling = require("image_resampling")
 
 local BootPage = {}
@@ -13,6 +13,8 @@ local gpu = peripheral.find("tm_gpu")
 local size = {gpu.getSize()}
 
 local main_group = ElementGroup:new(nil, "main_group")
+
+print(size[1].." "..size[2])
 
 local element_groups = {
     main_group:set_elements({
@@ -28,9 +30,9 @@ function BootPage:new()
     return o
 end
 
-function BootPage:update(gpu)
+function BootPage:draw(gpu)
     for _, element_group in ipairs(self.element_groups) do
-        element_group:update(gpu)
+        element_group:draw(gpu)
     end
 end
 

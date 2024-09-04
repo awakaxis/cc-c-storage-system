@@ -1,14 +1,14 @@
-local Page = require("page")
-local ElementGroup = require("element_group")
-local ScrollerGroup = require("scroller_group")
-local PageButtonElement = require("page_button_element")
-local Element = require("element")
+local Page = require("page.page")
+local ElementGroup = require("page.element.element_group")
+local ScrollerGroup = require("page.element.scroller_group")
+local PageButtonElement = require("page.element.page_button_element")
+local Element = require("page.element.element")
 local OrderManager = require("order_manager")
-local SearchElement = require("search_element")
-local QuantitySelectorElement = require("quantity_selector_element")
-local OrderEntryElement = require("order_entry_element")
-local UpdateOrderButtonElement = require("update_order_button_element")
-local SubmitOrderButtonElement = require("submit_order_button_element")
+local SearchElement = require("page.element.search_element")
+local QuantitySelectorElement = require("page.element.quantity_selector_element")
+local OrderEntryElement = require("page.element.order_entry_element")
+local UpdateOrderButtonElement = require("page.element.update_order_button_element")
+local SubmitOrderButtonElement = require("page.element.submit_order_button_element")
 
 local OrderPage = {}
 OrderPage.__index = OrderPage
@@ -106,8 +106,8 @@ function OrderPage:handle_click(x, y, sneak)
     return clicked_element
 end
 
-function OrderPage:update(gpu)
-    Page.update(self, gpu)
+function OrderPage:draw(gpu)
+    Page.draw(self, gpu)
     local search_preview = nil
     local quantity_selector = nil
     for _, group in ipairs(self.element_groups) do

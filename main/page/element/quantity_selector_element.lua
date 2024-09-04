@@ -1,4 +1,4 @@
-local Element = require("element")
+local Element = require("page.element.element")
 
 local QuantitySelectorElement = {}
 QuantitySelectorElement.__index = QuantitySelectorElement
@@ -33,9 +33,9 @@ function QuantitySelectorElement:get_value()
     return self.value
 end
 
-function QuantitySelectorElement:update(gpu)
+function QuantitySelectorElement:draw(gpu)
     if self.is_visible then
-        Element.update(self, gpu)
+        Element.draw(self, gpu)
         if self.quantity ~= nil then
             if not self.quantity:match("-?%d+") then
                 print(string.format("Invalid quantity: %s", self.quantity))

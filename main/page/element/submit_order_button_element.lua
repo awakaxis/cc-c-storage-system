@@ -1,4 +1,4 @@
-local Element = require("element")
+local Element = require("page.element.element")
 
 local SubmitOrderButtonElement = {}
 SubmitOrderButtonElement.__index = SubmitOrderButtonElement
@@ -11,9 +11,9 @@ function SubmitOrderButtonElement:new(parent_group, x, y, width, height, bg_colo
     return o
 end
 
-function SubmitOrderButtonElement:update(gpu)
+function SubmitOrderButtonElement:draw(gpu)
     if self.is_visible then
-        Element.update(self, gpu)
+        Element.draw(self, gpu)
         gpu.drawTextSmart(self.x, self.y, self.draw_text, self.text_color, self.background_color, true, 1, 1)
         gpu.sync()
     end

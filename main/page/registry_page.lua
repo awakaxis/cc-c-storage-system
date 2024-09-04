@@ -1,6 +1,6 @@
-local Page = require("page")
-local TextElement = require("text_element")
-local ElementGroup = require("element_group")
+local Page = require("page.page")
+local TextElement = require("page.element.text_element")
+local ElementGroup = require("page.element.element_group")
 
 local RegistryPage = {}
 RegistryPage.__index = RegistryPage

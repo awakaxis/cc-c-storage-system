@@ -57,12 +57,12 @@ function ElementGroup:check_click(x, y, sneak)
     return clicked[#clicked]
 end
 
-function ElementGroup:update(gpu)
+function ElementGroup:draw(gpu)
     if not self.is_visible then
         return
     end
     for _, element in ipairs(self.elements) do
-        element:update(gpu)
+        element:draw(gpu)
     end
 end
 

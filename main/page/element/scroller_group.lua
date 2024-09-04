@@ -1,4 +1,4 @@
-local ElementGroup = require("element_group")
+local ElementGroup = require("page.element.element_group")
 
 local ScrollerGroup = {}
 ScrollerGroup.__index = ScrollerGroup

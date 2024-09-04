@@ -1,4 +1,4 @@
-require("item_entry_element")
+require("page.element.item_entry_element")
 local ImageResampling = require("image_resampling")
 local PageManager = require("page_manager")
 local OrderManager = require("order_manager")
@@ -12,7 +12,11 @@ function Run()
     local size = {gpu.getSize()}
     print(size[1], size[2], size[3], size[4], size[5])
     local kb = peripheral.wrap("tm_keyboard_0")
-    kb.setFireNativeEvents(true)
+    if (kb == nil) then
+        io.stderr:write("No keyboard found. A keyboard is required to operate this machine.\n")
+    else
+        kb.setFireNativeEvents(true)
+    end
 
     PageManager:set_gpu(gpu)
 

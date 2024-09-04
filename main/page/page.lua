@@ -27,9 +27,9 @@ function Page:handle_click(x, y, sneak)
     return clicked[#clicked]:check_click(x, y, sneak)
 end
 
-function Page:update(gpu)
+function Page:draw(gpu)
     for _, element_group in ipairs(self.element_groups) do
-        element_group:update(gpu)
+        element_group:draw(gpu)
     end
 end
 

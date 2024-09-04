@@ -1,4 +1,4 @@
-local Element = require("element")
+local Element = require("page.element.element")
 
 local RegistryButtonElement = {}
 RegistryButtonElement.__index = RegistryButtonElement
@@ -11,8 +11,8 @@ function RegistryButtonElement:new(parent_group, x, y, width, height, background
     return o
 end
 
-function RegistryButtonElement:update(gpu)
-    Element.update(self, gpu)
+function RegistryButtonElement:draw(gpu)
+    Element.draw(self, gpu)
     gpu.drawTextSmart((self.x + (self.width / 2)) - ((self.button_text:len() * 8) / 2), self.y, self.button_text, self.text_color, self.background_color, true, 1, 1)
 end
 

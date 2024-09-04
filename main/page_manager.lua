@@ -1,29 +1,35 @@
-local BootPage = require("boot_page")
-local OverviewPage = require("overview_page")
-local OrderPage = require("order_page")
-local RegistryPage = require("registry_page")
+local BootPage = require("page.boot_page")
+local OverviewPage = require("page.overview_page")
+local OrderPage = require("page.order_page")
+local RegistryPage = require("page.registry_page")
 local OrderManager = require("order_manager")
+local inspect = require("inspect")
 
 local PageManager = {}
 PageManager.__index = PageManager
 PageManager.pages = {
-    BootPage:new(),
-    OverviewPage:new(),
-    OrderPage:new(),
-    RegistryPage:new()
+    ["boot"] = BootPage:new(),
+    ["overview"] = OverviewPage:new(),
+    ["order"] = OrderPage:new(),
+    ["registry"] = RegistryPage:new()
 }
-PageManager.current_page = PageManager.pages[1]
+PageManager.current_page = PageManager.pages["boot"]
 PageManager.gpu = nil
 PageManager.last_clicked = nil
 
 function PageManager:set_current_page(page_name)
-    for _, page in ipairs(self.pages) do
-        if page:get_name() == page_name then
-            self.current_page = page
-            return
-        end
+    local page = self.pages[page_name]
+    if page ~= nil then
+        print("hi")
+        self.current_page = page
+        return
     end
-    self.current_page = self.pages[1]
+    io.stderr:write("Error in PageManager: could not set page because page at index page_name is nil\n")
+    if self.pages["boot"] == nil then
+        io.stderr:write("Error in PageManager: failed to fallback to boot because pages[boot] is nil\n")
+        return
+    end
+    self.current_page = self.pages["boot"]
 end
 
 function PageManager:set_gpu(gpu)
@@ -44,7 +50,7 @@ function PageManager:handle_click(x, y, sneak)
         return
     end
     if self.current_page.name == "boot" then
-        self.current_page = self.pages[2]
+        self.current_page = self.pages["overview"]
         return
     end
     local last_clicked_element = self.current_page:handle_click(x, y, sneak)
@@ -350,14 +356,14 @@ function PageManager:update()
     if self.current_page == nil then
         io.stderr:write("Error in PageManager: current_page is nil\n")
         io.stderr:write("Attempting to set current_page to boot_page\n")
-        self.current_page = PageManager:set_current_page("boot")
+        self.current_page = self:set_current_page("boot")
         return
     end
     if self.gpu == nil then
         io.stderr:write("Error in PageManager: gpu is nil\n")
         return
     end
-    self.current_page:update(self.gpu)
+    self.current_page:draw(self.gpu)
 end
 
 return PageManager

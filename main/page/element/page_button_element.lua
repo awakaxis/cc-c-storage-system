@@ -1,4 +1,4 @@
-local Element = require("element")
+local Element = require("page.element.element")
 
 local PageButtonElement = {}
 PageButtonElement.__index = PageButtonElement
@@ -12,8 +12,8 @@ function PageButtonElement:new(parent_group, x, y, width, height, background_col
     return o
 end
 
-function PageButtonElement:update(gpu)
-    Element.update(self, gpu)
+function PageButtonElement:draw(gpu)
+    Element.draw(self, gpu)
     gpu.drawTextSmart((self.x + (self.width / 2)) - ((self.button_text:len() * 8) / 2), self.y, self.button_text, self.text_color, self.background_color, true, 1, 1)
 end
 

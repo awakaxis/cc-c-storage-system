@@ -1,5 +1,5 @@
-local Element = require("element")
-local ItemEntryElement = require("item_entry_element")
+local Element = require("page.element.element")
+local ItemEntryElement = require("page.element.item_entry_element")
 
 local SearchElement = {}
 SearchElement.__index = SearchElement
@@ -32,9 +32,9 @@ function SearchElement:update_items()
     registry = ParseItemData()
 end
 
-function SearchElement:update(gpu)
+function SearchElement:draw(gpu)
     if self.is_visible then
-        Element.update(self, gpu)
+        Element.draw(self, gpu)
         if self.draw_text ~= nil and self.draw_text:len() * 8 < self.width then
             gpu.drawTextSmart(self.x, self.y, self.draw_text, self.text_color, self.background_color, true, 1, 1)
         else
@@ -49,7 +49,7 @@ function SearchElement:update(gpu)
                 self.preview_entry = ItemEntryElement:create_placeholder(self.parent_group, self.x, self.y + 16 + 3, self.background_color, self.text_color)
             end
         end
-        self.preview_entry:update(gpu)
+        self.preview_entry:draw(gpu)
         gpu.sync()
     end
 end

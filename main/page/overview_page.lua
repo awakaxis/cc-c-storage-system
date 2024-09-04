@@ -1,11 +1,11 @@
-local Page = require("page")
-local ElementGroup = require("element_group")
-local Element = require("element")
-local TextElement = require("text_element")
-local ItemEntryElement = require("item_entry_element")
-local ScrollerGroup = require("scroller_group")
-local PageButtonElement = require("page_button_element")
-local RegistryButtonElement = require("registry_button_element")
+local Page = require("page.page")
+local ElementGroup = require("page.element.element_group")
+local Element = require("page.element.element")
+local TextElement = require("page.element.text_element")
+local ItemEntryElement = require("page.element.item_entry_element")
+local ScrollerGroup = require("page.element.scroller_group")
+local PageButtonElement = require("page.element.page_button_element")
+local RegistryButtonElement = require("page.element.registry_button_element")
 
 local OverviewPage = {}
 OverviewPage.__index = OverviewPage

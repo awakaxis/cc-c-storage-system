@@ -1,4 +1,4 @@
-local ItemEntryElement = require("item_entry_element")
+local ItemEntryElement = require("page.element.item_entry_element")
 
 local OrderEntryElement = {}
 OrderEntryElement.__index = OrderEntryElement
@@ -11,13 +11,13 @@ function OrderEntryElement:new(parent_group, x, y, bg_color, text_color, item, q
     return o
 end
 
-function OrderEntryElement:update(gpu)
+function OrderEntryElement:draw(gpu)
     local size = {gpu.getSize()}
     if self.is_visible then
         if self.y < 1 or self.y > size[2] - 24 then
             return
         end
-        ItemEntryElement.update(self, gpu)
+        ItemEntryElement.draw(self, gpu)
         gpu.drawTextSmart(self.x + 259, self.y, "x" .. self.quantity, self.text_color, self.background_color, true, 1, 1)
     end
 end
