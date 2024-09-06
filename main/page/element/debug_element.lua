@@ -1,17 +1,18 @@
-local Element = require("page.element.element")
+local ClickableElement = require("page.element.clickable_element")
 
 local DebugElement = {}
 DebugElement.__index = DebugElement
-setmetatable(DebugElement, {__index = Element})
+setmetatable(DebugElement, {__index = ClickableElement})
+DebugElement.type = "debug_element"
 
-function DebugElement:new(parent_group, x, y, width, height, background_color, image)
-    local o = Element:new("debug", parent_group, x, y, width, height, background_color, 0x000000, nil, image)
+function DebugElement:new(x, y, width, height)
+    local o = ClickableElement:new(x, y, width, height)
     setmetatable(o, self)
     return o
 end
 
 function DebugElement:on_click(x, y, sneak)
-    Element.on_click(self, x, y, sneak)
+    ClickableElement.on_click(self, x, y, sneak)
     -- check for clicks on the leftmost 5 pixels of the element
     if self.x <= x and x < self.x + 5 then
         print("Left side clicked")

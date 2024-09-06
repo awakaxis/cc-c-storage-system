@@ -11,7 +11,7 @@ function Run()
     gpu.sync()
     local size = {gpu.getSize()}
     print(size[1], size[2], size[3], size[4], size[5])
-    local kb = peripheral.wrap("tm_keyboard_0")
+    local kb = peripheral.find("tm_keyboard")
     if (kb == nil) then
         io.stderr:write("No keyboard found. A keyboard is required to operate this machine.\n")
     else
@@ -57,7 +57,7 @@ function Run()
                 print(eventData[3], eventData[4], eventData[5])
                 PageManager:handle_click(eventData[3], eventData[4], eventData[5])
             elseif eventData[1] == "tm_monitor_mouse_click" then
-                PageManager:handle_click(eventData[3], eventData[4 ], false)
+                PageManager:handle_click(eventData[3], eventData[4], false)
             elseif eventData[1] == "tm_monitor_mouse_scroll" then
                 PageManager:handle_scroll(eventData[5])
             elseif eventData[1] == "key_up" then
