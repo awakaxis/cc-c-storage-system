@@ -3,9 +3,10 @@ local ItemEntryElement = require("page.element.item_entry_element")
 local OrderEntryElement = {}
 OrderEntryElement.__index = OrderEntryElement
 setmetatable(OrderEntryElement, {__index = ItemEntryElement})
+OrderEntryElement.type = "order_entry"
 
-function OrderEntryElement:new(parent_group, x, y, bg_color, text_color, item, quantity)
-    local o = ItemEntryElement:new(parent_group, x, y, bg_color, text_color, item)
+function OrderEntryElement:new(x, y, bg_color, text_color, item, quantity)
+    local o = ItemEntryElement:new(x, y, bg_color, text_color, item)
     setmetatable(o, self)
     o.quantity = quantity
     return o

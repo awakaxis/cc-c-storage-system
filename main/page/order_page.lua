@@ -1,6 +1,7 @@
 local Page = require("page.page")
 local ElementGroup = require("page.element.element_group")
 local ScrollerGroup = require("page.element.scroller_group")
+local ButtonElement = require("page.element.button_element")
 local PageButtonElement = require("page.element.page_button_element")
 local Element = require("page.element.element")
 local OrderManager = require("order_manager")
@@ -35,7 +36,11 @@ local element_groups = {
 
     }),
     buttons:set_elements({
-        PageButtonElement:new(buttons, (size[1] - 64) - 32, 4, 64, 16, 0xCECECE, 0x000000, "Overview", "overview")
+        -- PageButtonElement:new(buttons, (size[1] - 64) - 32, 4, 64, 16, 0xCECECE, 0x000000, "Overview", "overview")
+        ButtonElement:new((size[1] - 64) - 32, 4, 64, 16, function (clickable)
+            local PageManager = require("page_manager")
+            PageManager:set_current_page("overview")
+        end, 0xCECECE, 0x000000, "Back")
     })
 }
 

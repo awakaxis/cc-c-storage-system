@@ -33,8 +33,8 @@ end
 --- @return boolean
 function ClickableElement:mouse_click(x, y, button)
     if self.is_visible and self.is_active then
-        if self:is_valid_click(button) then
-            if self.check_click(x, y, button == 1) then
+        if self.is_valid_click(button) then
+            if self:check_click(x, y, button == 1) then
                 self:on_click(x, y, button == 1)
                 return true
             end

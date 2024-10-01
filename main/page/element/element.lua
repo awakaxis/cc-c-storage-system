@@ -11,14 +11,12 @@ Element.width = 16
 Element.height = 8
 
 function Element:new(x, y, width, height)
-    local o = {
+    return setmetatable({
         x = x,
         y = y,
         width = width,
         height = height
-    }
-    setmetatable(o, self)
-    return o
+    }, self)
 end
 
 function Element:set_visibility(is_visible)

@@ -19,9 +19,6 @@ function Drawable.draw_element(d, gpu)
             if d.background_color then
                 gpu.filledRectangle(drawX, drawY, drawWidth, drawHeight, d.background_color)
             end
-            if d.text then
-                gpu.drawTextSmart(d.x - ((string.len(d.text) * 8) / 2), d.y - 8, d.text, d.text_color, d.background_color, true, 1, 1)
-            end
             gpu.sync()
         end
     end

@@ -5,6 +5,7 @@ local OrderManager = require("order_manager")
 
 function Run()
     local gpu = peripheral.find("tm_gpu")
+    gpu.setFont("ascii")
     gpu.refreshSize()
     gpu.setSize(64)
     gpu.fill(0xFFFFFFFF)
